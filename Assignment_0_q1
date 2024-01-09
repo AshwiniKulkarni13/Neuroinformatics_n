@@ -1,0 +1,9 @@
+histogram(Power(1,:))
+histogram(Power(2,:))
+x = Power(1,:);
+y = Power(2,:);
+[h,p] = ttest(x,y) 
+
+% h = 1 implies that the null hypothesis failed cearly stating that there
+% is significance difference in the two sets of data;
+%p = 0.0434 implies that difference is significant as it is less than 0.05
