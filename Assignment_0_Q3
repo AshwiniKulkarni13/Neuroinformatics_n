@@ -1,0 +1,42 @@
+clc
+clear all
+t = 0:0.001:4;
+f = [2, 8, 12, 25];
+A = sin(2*pi*f(1)*t);
+B = sin(2*pi*f(2)*t);
+C = sin(2*pi*f(3)*t);
+D = sin(2*pi*f(4)*t);
+
+% Adding white noise to each wave
+noise = 0.5; 
+
+A_noisy = A + noise * randn(size(t));
+B_noisy = B + noise * randn(size(t));
+C_noisy = C + noise * randn(size(t));
+D_noisy = D + noise * randn(size(t));
+E_noisy = A_noisy + B_noisy + C_noisy + D_noisy;
+subplot(6, 1, 1);
+plot(t, A_noisy);
+title('A with Noise');
+subplot(6, 1, 2);
+plot(t, B_noisy);
+title('B with Noise');
+subplot(6, 1, 3);
+plot(t, C_noisy);
+title('C with Noise');
+subplot(6, 1, 4);
+plot(t, D_noisy);
+title('D with Noise');
+subplot(6, 1, 5);
+plot(t, E_noisy);
+title('Combined Signal with Noise');
+%Fourier transform of the noisy combined signal
+E_noisy_fft = fft(E_noisy);
+subplot(6, 1, 6);
+plot(abs(E_noisy_fft));
+title('Fourier Transform of Combined Signal with Noise');
+
+%In this code, I added noise to each individual wave (A_noisy, B_noisy, C_noisy, D_noisy)and then combined them to 
+% form the noisy signal E_noisy.
+% The Fourier transform of the noisy combined signal is also plotted. 
+% noise_level parameter could be adjusted to control the amount of white noise added to the waves.
