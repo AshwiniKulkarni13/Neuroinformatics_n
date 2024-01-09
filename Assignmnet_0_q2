@@ -6,14 +6,25 @@ A = sin(2*pi*f(1)*t);
 B = sin(2*pi*f(2)*t);
 C = sin(2*pi*f(3)*t);
 D = sin(2*pi*f(4)*t);
-
-subplot(5,1,1);
+E = A+B+C+D;
+subplot(6,1,1);
 plot(t,A);
-subplot(5,1,2);
+subplot(6,1,2);
 plot(t,B);
-subplot(5,1,3);
+subplot(6,1,3);
 plot(t,C);
-subplot(5,1,4);
+subplot(6,1,4);
 plot(t,D);
-subplot(5,1,5);
-plot(t,A+B+C+D)
+subplot(6,1,5);
+plot(t,E);
+
+F =fft(E);
+subplot(6,1,6);
+plot(abs(F));
+
+% on using fft which is to calculate the fast Fourier transform of an
+% Aperiodic signal consisting of various frequencies can be separated
+% into the individual frequency components using the Fourier Transform.
+
+
+
