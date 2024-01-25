@@ -1,1 +1,92 @@
+%%Script-A
+function codeqwe(rows, cols)
+    % Step 1: Create a 4 x 8 matrix of randomly generated numbers.
+    matrix = rand(rows, cols);
 
+    % Step 2 and 3: Loop through all rows and columns, and test whether each element is greater than 0.5.
+    for i = 1:rows
+        for j = 1:cols
+            value = matrix(i, j);
+            % Step 4: Report the results of the test along with the value of the matrix element and its row-column position.
+            if value > 0.5
+                fprintf('The %d%s row and %d%s column has a value of %.5f and is bigger than 0.5.\n', i, ordinal(i), j, ordinal(j), value);
+            else
+                fprintf('The %d%s row and %d%s column has a value of %.5f and is not bigger than 0.5.\n', i, ordinal(i), j, ordinal(j), value);
+            end
+        end
+    end
+end
+
+% Helper function to convert a number to its ordinal representation
+function ord = ordinal(num)
+    if num == 1
+        ord = 'st';
+    elseif num == 2
+        ord = 'nd';
+    elseif num == 3
+        ord = 'rd';
+    else
+        ord = 'th';
+    end
+end
+%%%end
+
+
+
+
+%%%Script-B
+
+
+% Task 6: Import and plot the picture of Amsterdam
+amsterdamImage = imread('amsterdam.jpg');
+imshow(amsterdamImage);
+hold on;
+
+% Task 7: Plot a thick red line from "Nieuwmarkt" to "Station Amsterdam Centraal"
+nieuwmarkt = [x1, y1];  % Replace with actual coordinates
+centraal = [x2, y2];    % Replace with actual coordinates
+plot([nieuwmarkt(1), centraal(1)], [nieuwmarkt(2), centraal(2)], 'LineWidth', 3, 'Color', 'red');
+
+% Task 8: Plot a magenta star over the Waterlooplein metro station
+waterlooplein = [x3, y3];  % Replace with actual coordinates
+plot(waterlooplein(1), waterlooplein(2), 'p', 'MarkerSize', 12, 'MarkerEdgeColor', 'magenta', 'MarkerFaceColor', 'magenta');
+
+% Task 9: Find and plot a circle using the color of the maximum value pixel
+[maxValue, maxIndex] = max(amsterdamImage(:));
+[maxRow, maxCol, ~] = ind2sub(size(amsterdamImage), maxIndex);
+maxColor = squeeze(amsterdamImage(maxRow, maxCol, :));
+rectangle('Position', [maxCol - 5, maxRow - 5, 10, 10], 'Curvature', [1, 1], 'EdgeColor', maxColor / 255);
+
+hold off;
+%%end
+
+
+%%script C
+
+
+function resultMatrix = taskthree(rows, cols)
+    resultMatrix = zeros(rows * cols, 3);
+
+    % Generate a random matrix
+    matrix = rand(rows, cols);
+
+    % Loop through all rows and columns
+    k = 1;
+    for i = 1:rows
+        for j = 1:cols
+            resultMatrix(k, 1) = i;      % Row
+            resultMatrix(k, 2) = j;      % Column
+            resultMatrix(k, 3) = matrix(i, j) > 0.5;  % Result of the test
+            k = k + 1;
+        end
+    end
+
+    % Write the resultMatrix to a text file
+    header = {'Row', 'Column', 'Result'};
+    dlmwrite('test_results.txt', header, 'delimiter', '\t', 'newline', 'pc');
+    dlmwrite('test_results.txt', resultMatrix, '-append', 'delimiter', '\t', 'newline', 'pc');
+end
+
+
+
+%%endd
